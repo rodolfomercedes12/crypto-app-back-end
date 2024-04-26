@@ -8,7 +8,7 @@ const dbConnection = async () =>{
             //useCreateIndex: true,
             useUnifiedTopology: true
         });
-        console.log( "Connected MONGODB !!!!" );
+       
 
     }catch(error){
         console.log(error);

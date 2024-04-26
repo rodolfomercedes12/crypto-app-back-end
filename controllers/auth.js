@@ -19,13 +19,13 @@ const crearUsuario = async(req, res = response) => {
           });
       }   
      const usuario = new Usuario( req.body );
-     //encriptar password
+    
       const salt = bcrypt.genSaltSync();
       usuario.password = bcrypt.hashSync( password, salt );
  
      await usuario.save();
  
-     //Generar JWT
+    
  
  
      const token = await generarJWT( usuario.id ); 
@@ -51,7 +51,6 @@ const crearUsuario = async(req, res = response) => {
 
  const login = async(req, res = response) => {
 
-
     
     const { email, password } = req.body;
 
@@ -65,7 +64,7 @@ const crearUsuario = async(req, res = response) => {
            });
        }
 
-       //validar password
+     
        const validPassword = bcrypt.compareSync( password, usuarioDB.password );
        if( !validPassword ){
         return res.status(400).json({
@@ -74,7 +73,7 @@ const crearUsuario = async(req, res = response) => {
         });
        }
 
-       //GENERAR JWT
+      
 
         const token = await generarJWT( usuarioDB.id );
 
@@ -88,7 +87,7 @@ const crearUsuario = async(req, res = response) => {
         console.log( error );
         return res.status(500).json({
             ok:false,
-            msg: "Hable con el admin"
+            msg: "Error al iniciar sesión"
         });
     }
 
